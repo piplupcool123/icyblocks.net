@@ -1,0 +1,26 @@
+body{
+    background-color: rgb(140, 93, 158);
+
+    color: white;
+
+    font-family: 'Courier New', Courier, monospace;
+}
+
+img{
+    height: auto;
+    width: 100%;
+}
+
+
+#demo .carousel-item img {  
+    object-fit: cover;
+    object-position: center;
+    overflow: hidden;
+    height:50vh;
+}
+
+.highlight{
+    font-weight: 700;
+    background-color: #f04bff;
+    color: black;
+}
