@@ -1,74 +1,76 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-body{
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    margin: 0;
     font-family: 'Overpass Mono', monospace;
-    background-image: url("Images/gus.png");
+    color: #474747;
+    background-color: #white;
+}
+
+#main {
+    display: flex;
+    flex: 1;
+}
+
+#main>article {
+    flex: 1;
+}
+
+#main>nav,
+#main>aside{
+    flex: 0 0 20vw;
+    color: #6D8B9E
+}
+a {
+    background: 
+      linear-gradient(to right, white, white),
+      linear-gradient(to right, #6D8B9E, #6D8B9E, #6D8B9E);
+    background-size: 100% 0.1em, 0 0.1em;
+    background-position: 100% 100%, 0 100%;
     background-repeat: no-repeat;
-    background-size: cover;
-    color:#474747;
-    margin-top: 0px;
+    transition: background-size 300ms, color 400ms;
+    text-decoration: none;
+    font-weight: 1000;
+  }
+  
+  a:hover,
+  a:focus {
+    background-size: 0 0.1em, 100% 0.1em;
+    color:#27acff;
+  }
 
-}
-
-#container{
-    display: flex;
-    flex-direction: column;
-    margin-left: 20%;
-    background-color: #92B7E6;
-    margin-right: 20%;
-    min-width: 500px;
-    justify-content: center;
-}
-
-main, footer{
-    margin-left: 20px;
+#main>nav {
+    order: -1;
 }
 
-header{
-    display: flex;
-    justify-content: center;
+header,
+footer {
+    background-color: #6D8B9E;
+    color:azure
 }
 
-#headerContainer{
-    display: flex;
-    flex-direction: column;
-    
-}
-.flexClass{
 
-    display: flex;
-    flex-wrap: wrap;
+header,
+footer,
+article,
+nav,
+aside {
+    padding: 1em;
 }
 
-.flexClass div{
-    padding-left: 20px;
-    padding-right: 20px;
-    background-color: #edf2ff;
+.articleImage{
+    transition: border-radius 0.5s;
+    border-radius: 25px;
+    padding: 10px;
 }
 
-.linkButton a{
-    background-color: #cbffc1;
-}
-
-h1{
-    font-family: 'Comfortaa', cursive;
-}
-
-h2{
-    font-family: 'Montserrat', sans-serif;
-}
-
-.logo{
-    width: auto;
-    height: 150px;
-}
-
-.highlight{
-    color:#BFFFE8;
-}
-.highlight2{
-    color:#edf2ff;
-}
-.highlight3{
-    color:#cbffc1;
+.articleImage:hover{
+    border-radius: 0px;
 }
