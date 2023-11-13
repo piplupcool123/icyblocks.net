@@ -9,12 +9,6 @@ body{
     background-position: center; /* Center the image */
 
     color: white;
-
-    font-family: 'Montserrat', sans-serif;
-}
-
-h1 h2 h3{
-    font-family: 'IBM Plex Mono', monospace;
 }
 
 img{
