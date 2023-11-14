@@ -15,6 +15,17 @@ img{
     width: 100%;
 }
 
+.navLink{
+    text-decoration:none;
+    font-weight: bolder;
+    font-size: larger;
+    color: white;
+}
+.navLink:hover {
+    color: #b9ddff;
+}
+
+
 
 #demo .carousel-item img {  
     object-fit: cover;
