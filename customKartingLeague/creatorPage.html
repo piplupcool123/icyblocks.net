@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Author Page</h1>
+    </header>
+
+    <div id="author-info">
+        <img id="author-image" src="" alt="Author Image">
+        <div id="author-bio"></div>
+    </div>
+
+    <script>
+        // Fetch author name from the URL
+const authorName = window.location.hash.slice(1);
+
+// Log the extracted author name to the console
+console.log("Extracted Author Name:", authorName);
+
+// Sample authors data
+const authorsData = [
+    {
+        nameID: "Elsa",
+        bio: "Queen of Arendelle, known for her ice powers.",
+        image: "https://placekitten.com/300/200"
+    },
+    {
+        nameID: "Aladdin",
+        bio: "Street-smart young man with a magic carpet.",
+        image: "https://placekitten.com/300/201"
+    },
+    {
+        nameID: "Hades",
+        bio: "Ruler of the Underworld with a fiery personality.",
+        image: "https://placekitten.com/300/202"
+    },
+    {
+        nameID: "SherlockHolmes",
+        bio: "Famous detective with a keen sense of observation.",
+        image: "https://placekitten.com/300/203"
+    }
+    // Add more authors as needed
+];
+
+// Log all author names to the console for comparison
+const allAuthorNames = authorsData.map(a => a.nameID.toLowerCase());
+console.log("All Author Names:", allAuthorNames);
+
+// Find the author in authorsData
+const author = authorsData.find(a => a.nameID.toLowerCase() === authorName.toLowerCase());
+
+if (author) {
+    // Update the author information
+    document.getElementById("author-image").src = author.image;
+    document.getElementById("author-bio").textContent = author.bio;
+} else {
+    // Redirect to a 404 page or handle the case when the author is not found
+    window.location.href = "404.html";
+}
+
+    </script>
+
+</body>
+
+</html>

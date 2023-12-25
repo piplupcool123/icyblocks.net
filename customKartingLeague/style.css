@@ -1,0 +1,156 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+nav {
+    background-color: #444;
+    padding: 10px;
+    text-align: center;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    background-color: #555;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: #777;
+}
+
+#search-bar-container {
+    margin: 10px;
+    display: none;
+    /* Hide the search bar by default */
+}
+
+#search-note {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+    display: none;
+    /* Hide the search note by default */
+}
+
+#search-bar {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#pages-container {
+    margin: 20px;
+}
+
+.page {
+    display: none;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.page-ending {
+    margin-top: 20px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    font-style: italic;
+    color: #555;
+}
+
+#page-list {
+    text-align: center;
+}
+
+#page-list h2 {
+    margin-top: 0;
+    /* Remove default margin */
+    color: #333;
+    /* Adjust text color */
+}
+
+#page-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+#page-list li {
+    margin-bottom: 5px;
+}
+
+#search-results {
+    display: none;
+}
+
+#search-results ul {
+    list-style: none;
+    padding: 0;
+}
+
+#search-results li {
+    margin-bottom: 5px;
+}
+
+#search-results a {
+    color: blue;
+    /* Set link color to blue */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#search-results a:hover {
+    text-decoration: underline;
+}
+
+#author-info {
+    margin: 20px;
+}
+
+#author-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#author-bio {
+    font-style: italic;
+    color: #555;
+    font-size: 1.2em;
+}
+
+.page-title {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+}
+
+.author {
+    font-style: italic;
+    color: #555;
+    font-size: 0.8em;
+    /* Make the author text smaller */
+    cursor: pointer;
+    /* Add cursor pointer for better interaction */
+}
