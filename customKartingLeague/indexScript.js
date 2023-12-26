@@ -125,7 +125,7 @@ function showPageFromHash() {
 window.addEventListener("load", showPageFromHash);
 window.addEventListener("hashchange", showPageFromHash);
 
-const currentPath = window.location.pathname;
+const currentPath = window.location.hash;
 
 function showPage(pageId) {
     const pages = document.querySelectorAll('.page');
@@ -140,9 +140,8 @@ function showPage(pageId) {
 
     const isAuthorPage = uniqueAuthors.includes(pageId);
 
-    console.log(currentPath)
 
-    if (currentFilePath.includes("index.html") || currentPath === '/' || currentPath === '/customkartingleague/') {
+    if (currentFilePath.includes("index.html")) {
         const pageList = document.getElementById('page-list');
         pageList.style.display = (pageId === 'page-list') ? 'block' : 'none';
 
