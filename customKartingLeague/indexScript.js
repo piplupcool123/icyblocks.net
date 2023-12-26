@@ -134,7 +134,7 @@ function showPageFromHash() {
 window.addEventListener("load", showPageFromHash);
 window.addEventListener("hashchange", showPageFromHash);
 
-const currentPath = window.location.hash;
+const currentPath = window.location.href;
 
 function showPage(pageId) {
     const pages = document.querySelectorAll('.page');
