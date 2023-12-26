@@ -414,6 +414,11 @@ document.addEventListener("click", function (event) {
         const authorName = authorElement.textContent.trim();
         const cleanedAuthorName = authorName.replace(/\W/g, ''); // Remove non-word characters
         window.location.href = `creatorPage.html#${cleanedAuthorName}`;
+        setTimeout(reloadPage, 100);
     }
 });
+
+function reloadPage() {
+    location.reload(true);
+}
 
