@@ -140,6 +140,7 @@ function showPage(pageId) {
 
     const isAuthorPage = uniqueAuthors.includes(pageId);
 
+    console.log("updateTEst")
 
     if (currentFilePath.includes("index.html")) {
         const pageList = document.getElementById('page-list');
