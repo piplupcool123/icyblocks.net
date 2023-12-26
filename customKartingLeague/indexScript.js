@@ -125,7 +125,7 @@ function showPageFromHash() {
 window.addEventListener("load", showPageFromHash);
 window.addEventListener("hashchange", showPageFromHash);
 
-const currentPath = window.location.hash;
+const currentPath = window.location.href;
 
 function showPage(pageId) {
     const pages = document.querySelectorAll('.page');
@@ -140,7 +140,6 @@ function showPage(pageId) {
 
     const isAuthorPage = uniqueAuthors.includes(pageId);
 
-    console.log("updateTEst")
 
     if (currentFilePath.includes("index.html")) {
         const pageList = document.getElementById('page-list');
@@ -188,7 +187,7 @@ function authorLinkCreation(page, listItem) {
         authorLink.innerHTML = `<span class="author">${authorElement}</span>`;
 
         listItem.appendChild(authorLink);
-        listItem.appendChild(document.createTextNode('-'));
+        listItem.appendChild(document.createTextNode('--'));
     });
 
 }
