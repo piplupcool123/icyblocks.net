@@ -58,10 +58,19 @@ const authorsData2 = [
 
 const authorsData = [];
 
-const uniqueAuthors = [...new Set(pagesData.map(page => page.author))];
-uniqueAuthors.forEach(author => {
-    const authorPages = pagesData.filter(page => page.author === author).map(page => page.id);
-    authorsData.push({ name: author, pages: authorPages });
+const uniqueAuthors = [...new Set(pagesData.flatMap(page => page.author))];
+uniqueAuthors.forEach(authorName => {
+    const authorPages = pagesData.filter(page => page.author.includes(authorName)).map(page => page.id);
+    
+    const authorInfo = authorsData2.find(author => author.nameID === authorName);
+    const authorObject = {
+        name: authorName,
+        pages: authorPages,
+        bio: authorInfo ? authorInfo.bio : "No bio available",
+        image: authorInfo ? authorInfo.image : "https://placekitten.com/300/200" // Default image if not found
+    };
+
+    authorsData.push(authorObject);
 });
 
 // Get the current file path
@@ -125,7 +134,7 @@ function showPageFromHash() {
 window.addEventListener("load", showPageFromHash);
 window.addEventListener("hashchange", showPageFromHash);
 
-const currentPath = window.location.href;
+const currentPath = window.location.pathname;
 
 function showPage(pageId) {
     const pages = document.querySelectorAll('.page');
