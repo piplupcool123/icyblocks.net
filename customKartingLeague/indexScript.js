@@ -150,7 +150,8 @@ function showPage(pageId) {
     const isAuthorPage = uniqueAuthors.includes(pageId);
 
 
-    if (currentFilePath.includes("index.html") || currentFilePath.includes("customkartingleague/") || currentFilePath.includes("customKartingLeague/")) {
+    //if (currentFilePath.includes("index.html") || currentFilePath.includes("customkartingleague/") || currentFilePath.includes("customKartingLeague/")) {
+    if (currentFilePath.includes("index.html")) {
         const pageList = document.getElementById('page-list');
         pageList.style.display = (pageId === 'page-list') ? 'block' : 'none';
 
