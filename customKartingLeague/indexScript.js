@@ -243,14 +243,41 @@ function updateSearchResultsLinks(searchInput) {
     const searchResultsList = document.getElementById('search-results-list');
     searchResultsList.innerHTML = '';
 
+    let filteredPages;
+
     // Always display the full list when there's no search input
     if (!searchInput || searchInput.trim() === '') {
-        pagesData.forEach(page => {
+        filteredPages = pagesData;
+    } else {
+        // Filter results based on search input
+        filteredPages = pagesData.filter(page => {
+            const title = page.title.toLowerCase();
+            const description = page.description.toLowerCase();
+            const ending = page.ending.toLowerCase();
+            const authors = page.author.map(author => author.toLowerCase());
+
+            return (
+                title.includes(searchInput) ||
+                description.includes(searchInput) ||
+                ending.includes(searchInput) ||
+                authors.some(author => author.includes(searchInput))
+            );
+        });
+    }
+
+    // Sort filtered pages by page.id (assuming page.id is an integer)
+    filteredPages.sort((a, b) => a.id - b.id);
+
+    if (filteredPages.length === 0) {
+        const noResultsItem = document.createElement('li');
+        noResultsItem.textContent = 'No results found.';
+        searchResultsList.appendChild(noResultsItem);
+    } else {
+        filteredPages.forEach(page => {
             const listItem = document.createElement('li');
 
             // Create separate links for page title and author
             const titleLink = document.createElement('a');
-
 
             titleLink.href = `./index.html#${page.id}`;
 
@@ -258,52 +285,15 @@ function updateSearchResultsLinks(searchInput) {
 
             // Append title and author links to the list item
             listItem.appendChild(titleLink);
-            authorLinkCreation(page, listItem)
+            authorLinkCreation(page, listItem);
 
             // Append the list item to the search results list
             searchResultsList.appendChild(listItem);
         });
-    } else {
-        // Filter and display results based on search input
-        const filteredPages = pagesData.filter(page => {
-            const title = page.title.toLowerCase();
-            const description = page.description.toLowerCase();
-            const ending = page.ending.toLowerCase();
-            const author = page.author.toLowerCase();
-
-            return (
-                title.includes(searchInput) ||
-                description.includes(searchInput) ||
-                ending.includes(searchInput) ||
-                author.includes(searchInput)
-            );
-        });
-
-        if (filteredPages.length === 0) {
-            const noResultsItem = document.createElement('li');
-            noResultsItem.textContent = 'No results found.';
-            searchResultsList.appendChild(noResultsItem);
-        } else {
-            filteredPages.forEach(page => {
-                const listItem = document.createElement('li');
-
-                // Create separate links for page title and author
-                const titleLink = document.createElement('a');
-
-                titleLink.href = `./index.html#${page.id}`;
-
-                titleLink.innerHTML = `<span class="page-title">${page.title}</span>`;
-
-                // Append title and author links to the list item
-                listItem.appendChild(titleLink);
-                authorLinkCreation(page, listItem)
-
-                // Append the list item to the search results list
-                searchResultsList.appendChild(listItem);
-            });
-        }
     }
 }
+
+
 
 function updateSearchResultsLinksByAuthor(authorToSearch) {
     const searchResultsList = document.getElementById('search-results-list');
