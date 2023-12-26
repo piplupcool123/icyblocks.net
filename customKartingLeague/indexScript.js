@@ -196,7 +196,7 @@ function authorLinkCreation(page, listItem) {
         authorLink.innerHTML = `<span class="author">${authorElement}</span>`;
 
         listItem.appendChild(authorLink);
-        listItem.appendChild(document.createTextNode('---'));
+        listItem.appendChild(document.createTextNode('-----'));
     });
 
 }
