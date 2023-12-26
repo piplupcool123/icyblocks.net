@@ -138,7 +138,7 @@ function showPage(pageId) {
 
     const isAuthorPage = uniqueAuthors.includes(pageId);
 
-    if (currentFilePath.includes("index.html")) {
+    if (currentFilePath.includes("index.html") || currentPath === '/' || currentPath === '/customkartingleague/') {
         const pageList = document.getElementById('page-list');
         pageList.style.display = (pageId === 'page-list') ? 'block' : 'none';
 
@@ -177,8 +177,8 @@ function filterPages() {
     }
 }
 
-function authorLinkCreation(page,listItem){
-    page.author.forEach(function(authorElement) {
+function authorLinkCreation(page, listItem) {
+    page.author.forEach(function (authorElement) {
         const authorLink = document.createElement('a');
         authorLink.href = `./creatorPage.html#${authorElement.replace(/\W/g, '')}`;
         authorLink.innerHTML = `<span class="author">${authorElement}</span>`;
@@ -186,7 +186,7 @@ function authorLinkCreation(page,listItem){
         listItem.appendChild(authorLink);
         listItem.appendChild(document.createTextNode('-'));
     });
-    
+
 }
 
 function updatePageListLinks() {
@@ -215,7 +215,7 @@ function updatePageListLinks() {
 
             // Append title and author links to the list item
             listItem.appendChild(titleLink);
-            authorLinkCreation(page,listItem)
+            authorLinkCreation(page, listItem)
 
             // Append the list item to the category list
             categoryList.appendChild(listItem);
@@ -234,19 +234,19 @@ function updateSearchResultsLinks(searchInput) {
     if (!searchInput || searchInput.trim() === '') {
         pagesData.forEach(page => {
             const listItem = document.createElement('li');
-            
+
             // Create separate links for page title and author
             const titleLink = document.createElement('a');
-            
-            
+
+
             titleLink.href = `./index.html#${page.id}`;
-            
+
             titleLink.innerHTML = `<span class="page-title">${page.title}</span>`;
-            
+
             // Append title and author links to the list item
             listItem.appendChild(titleLink);
-            authorLinkCreation(page,listItem)
-            
+            authorLinkCreation(page, listItem)
+
             // Append the list item to the search results list
             searchResultsList.appendChild(listItem);
         });
@@ -273,18 +273,18 @@ function updateSearchResultsLinks(searchInput) {
         } else {
             filteredPages.forEach(page => {
                 const listItem = document.createElement('li');
-                
+
                 // Create separate links for page title and author
                 const titleLink = document.createElement('a');
-                
+
                 titleLink.href = `./index.html#${page.id}`;
-                
+
                 titleLink.innerHTML = `<span class="page-title">${page.title}</span>`;
-                
+
                 // Append title and author links to the list item
                 listItem.appendChild(titleLink);
-                authorLinkCreation(page,listItem)
-                
+                authorLinkCreation(page, listItem)
+
                 // Append the list item to the search results list
                 searchResultsList.appendChild(listItem);
             });
@@ -317,18 +317,18 @@ function updateSearchResultsLinksByAuthor(authorToSearch) {
     } else {
         filteredPages.forEach(page => {
             const listItem = document.createElement('li');
-            
+
             // Create separate links for author and title
             const titleLink = document.createElement('a');
-            
+
             titleLink.href = `./index.html#${page.id}`;
-            
+
             titleLink.innerHTML = `<span class="page-title">${page.title}</span>`;
-            
+
             // Append author and title links to the list item
-            authorLinkCreation(page,listItem);
+            authorLinkCreation(page, listItem);
             listItem.appendChild(titleLink);
-            
+
             // Append the list item to the search results list
             searchResultsList.appendChild(listItem);
         });
@@ -356,18 +356,18 @@ function updateSearchResultsLinksByTrack(trackNameToSearch) {
     } else {
         filteredPages.forEach(page => {
             const listItem = document.createElement('li');
-            
+
             // Create separate links for author and title
             const titleLink = document.createElement('a');
-            
+
             titleLink.href = `./index.html#${page.id}`;
-            
+
             titleLink.innerHTML = `<span class="page-title">${page.title}</span>`;
-            
+
             // Append author and title links to the list item
             listItem.appendChild(titleLink);
-            authorLinkCreation(page,listItem);
-            
+            authorLinkCreation(page, listItem);
+
             // Append the list item to the search results list
             searchResultsList.appendChild(listItem);
         });
