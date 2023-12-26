@@ -80,47 +80,27 @@ img {
     color: #555;
 }
 
-#page-list {
-    text-align: center;
-}
-
-#page-list h2 {
-    margin-top: 0;
-    /* Remove default margin */
-    color: #333;
-    /* Adjust text color */
-}
-
-#page-list ul {
-    list-style: none;
-    padding: 0;
-}
-
-#page-list li {
-    margin-bottom: 5px;
-}
-
-#search-results {
+#search-results, #page-list {
     display: none;
 }
 
-#search-results ul {
+#search-results ul, #page-list ul {
     list-style: none;
     padding: 0;
 }
 
-#search-results li {
+#search-results li, #page-list li {
     margin-bottom: 5px;
 }
 
-#search-results a {
+#search-results a, #page-list a {
     color: blue;
     /* Set link color to blue */
     text-decoration: none;
     font-weight: bold;
 }
 
-#search-results a:hover {
+#search-results a:hover, #page-list a:hover {
     text-decoration: underline;
 }
 
