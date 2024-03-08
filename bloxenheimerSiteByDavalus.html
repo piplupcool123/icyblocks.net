@@ -1,8 +1,22 @@
 <head>
-  <style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nixie+One&family=Schoolbell&display=swap" rel="stylesheet">  <style>
 /* Additional styling for content and footer */
+
+body{
+  background-color: #3a3030;
+  color: #ffffff;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
 #main-content {
-  background-color: #ffffff;
+  background-color: #505050;
   padding: 20px;
   margin-top: 20px;
 }
@@ -12,7 +26,10 @@
 }
 
 #introduction h2 {
-  color: #333333;
+  color: hsl(39, 100%, 89%);
+  font-family: "Schoolbell", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 
 #introduction p.lead {
@@ -32,11 +49,61 @@
   text-align: center;
   padding: 10px;
   margin-top: 20px;
+
+  font-family: "Nixie One", system-ui;
+  font-weight: 400;
+  font-style: normal;
 }
 
 #main-footer p {
   margin: 0;
 }
+
+article {
+  background-color: #383333;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+article h3 {
+  color: #fff2cd;
+  font-family: "Schoolbell", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+article ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+article ul li::before {
+  content: "🔬 ";
+  color: orange;
+}
+
+#contact {
+  text-align: center;
+}
+
+#contact a {
+  display: inline-block;
+  font-weight: bold;
+  background: orange;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+#contact a:hover {
+  background-color: #e8491d;
+}
+
+
   </style>
 </head>
 
@@ -44,10 +111,44 @@
   <article id="introduction">
     <h2>Bloxenheimer: The Emissary of Science</h2>
     <p class="lead">In the verdant valleys of Orange, a mind as bright as the sun itself emits the light of understanding into the mysteries of the universe. Bloxenheimer, world-renowned physicist, continues to challenge the frontiers of knowledge.</p>
-    <img src="bloxenheimer.jpg" alt="Bloxenheimer">
+    <img src="https://cdn.discordapp.com/attachments/801663623407730698/1215477497156599848/bloxenheimer.png?ex=65fce4a1&is=65ea6fa1&hm=87dacca74994f489285e2afec0a0002d4d5938c78db00d85dcf3b137938e6581&" alt="Bloxenheimer" style="max-width: 300px;">
+  </article>
+
+  <article id="contributions">
     <h3>Key Contributions</h3>
-    <p>Bloxenheimer's work on quantum entanglement has paved the way for significant advancements in the field of quantum computing. His theories on gravitational waves have also been a cornerstone in the study of cosmic phenomena.</p>
-    <!-- More detailed sections can be added here -->
+    <p>Bloxenheimer's pioneering work on quantum entanglement has paved the way for significant advancements in the field of quantum computing. His theories on gravitational waves have been a cornerstone in our study of cosmic phenomena and have aided countless other discoveries through the ripple effects of his wisdom.</p>
+  </article>
+
+  <article id="publications">
+    <h3>Notable Publications</h3>
+    <ul>
+      <li>"Quantum Entanglement: Beyond Spooky Action at a Distance" 1938</li>
+      <li>"Gravitational Waves and The Tapestry of Space-Time" 1944</li>
+      <li>"Harnessing The Power of Infinity: The Future of Energy" 2016</li>
+      <li>"The Quantum Computing Revolution: Unlocking Infinite Potential" 2020</li>
+<li>"Exploring the Multiverse: A Journey Beyond Dimensions" 2055</li>
+<li>"Nanotechnology: Building the Future Atom by Atom" 2035</li>
+<li>"Artificial Intelligence: From Sentience to Singularity" 2077</li>
+<li>"The Mysteries of Dark Matter: Illuminating the Universe" 2123</li>
+<li>"Genetic Engineering: Redefining Life Itself" 2040</li>
+<li>"The Future of Transportation: Hyperloop and Beyond" 2058</li>
+<li>"Augmented Reality: Blurring the Lines Between Real and Virtual" 2032</li>
+<li>"Space Tourism: The Next Frontier for Adventurers" 2065</li>
+<li>"Biohacking: Pushing the Boundaries of Human Potential" 2070</li>
+<li>"Renewable Energy Revolution: Harnessing Sun, Wind, and Water" 2045</li>
+<li>"The Ethics of Artificial Intelligence: Ensuring a Humane Future" 2080</li>
+<li>"Exploring Oceanic Depths: Unraveling Mysteries Beneath the Waves" 2050</li>
+<li>"The Age of Biotechnology: Engineering Life for Health and Sustainability" 2063</li>
+<li>"Colonizing Mars: Humanity's Next Great Adventure" 2090</li>
+
+      <!-- Additional publications can be listed here -->
+    </ul>
+  </article>
+
+  <article id="contact">
+    <h3>Contact</h3>
+    <p>For inquiries or to discuss the intricacies of the universe, you may reach out to Bloxenheimer through the ether of electronic mail:</p>
+    <p><a href="mailto:bloxenheimer@robloxUniversity.rblx">bloxenheimer@robloxUniversity.rblx</a></p>
   </article>
 </section>
 
