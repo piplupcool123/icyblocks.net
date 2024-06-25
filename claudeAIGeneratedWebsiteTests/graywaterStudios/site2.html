@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Graywater Studios - Pioneering the Future of Interactive Entertainment</title>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+        <style>
+            :root {
+                --primary: #2c3e50;
+                --secondary: #34495e;
+                --accent: #3498db;
+                --text: #ecf0f1;
+                --light: #ecf0f1;
+            }
+            body, html {
+                margin: 0;
+                padding: 0;
+                font-family: 'Poppins', sans-serif;
+                color: var(--text);
+                line-height: 1.6;
+                overflow-x: hidden;
+                background-color: var(--primary);
+                transition: all 0.5s ease;
+                
+
+            }
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+            header {
+                background-color: rgba(44, 62, 80, 0.9);
+                color: var(--light);
+                padding: 20px 0;
+                position: fixed;
+                width: 100%;
+                z-index: 1000;
+            }
+            nav ul {
+                list-style-type: none;
+                padding: 0;
+                display: flex;
+                justify-content: space-around;
+            }
+            nav ul li a {
+                color: var(--light);
+                text-decoration: none;
+                font-weight: 600;
+                transition: all 0.3s ease;
+            }
+            nav ul li a:hover {
+                color: var(--accent);
+                transform: scale(1.1);
+            }
+            h1, h2, h3 {
+                color: var(--light);
+            }
+            .banner {
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                color: var(--light);
+                position: relative;
+                overflow: hidden;
+            }
+            .banner-content {
+                position: relative;
+                z-index: 2;
+            }
+            .banner h1 {
+                font-size: 3.5em;
+                margin-bottom: 20px;
+                color: var(--light);
+            }
+            .btn {
+                display: inline-block;
+                background-color: var(--accent);
+                color: var(--light);
+                padding: 10px 20px;
+                text-decoration: none;
+                border-radius: 5px;
+                transition: all 0.3s ease;
+            }
+            .btn:hover {
+                background-color: #2980b9;
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+                transform: rotateY(15deg) rotateX(5deg);
+            }
+            section {
+                padding: 80px 0;
+                position: relative;
+            }
+            .bg-section {
+                position: relative;
+                overflow: hidden;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            .bg-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.6);
+            }
+            .bg-content {
+                position: relative;
+                z-index: 2;
+                color: var(--light);
+            }
+            .game-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            .game-card {
+                background-color: var(--secondary);
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 4px 6px rgba(0,0,0,0);
+                transition: all 0.5s ease;
+            }
+            .game-card:hover {
+                transform: perspective(1000px) rotateY(10deg) translateY(-10px);
+                box-shadow: 0 15px 30px rgba(0,0,0,0);
+            }
+            .game-card img {
+
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+            }
+            .game-card-content {
+                padding: 20px;
+            }
+
+            .stats {
+                background-color: var(--secondary);
+                color: var(--light);
+                padding: 40px 0;
+                text-align: center;
+            }
+            .stat-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+            }
+            .stat-item {
+                transition: all 0.3s ease;
+            }
+            .stat-item:hover {
+                transform: translateY(-10px);
+            }
+            .stat-item h3 {
+                font-size: 2.5em;
+                margin-bottom: 10px;
+                color: var(--accent);
+            }
+            footer {
+                background-color: var(--primary);
+                color: var(--light);
+                text-align: center;
+                padding: 20px 0;
+                margin-top: 50px;
+            }
+            #3d-cube {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: -1;
+            }
+            .fade-in {
+                opacity: 0;
+                transform: translateY(50px);
+                transition: opacity 1s ease, transform 1s ease;
+            }
+            .fade-in.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        </style>
+    </head>
+<body>
+
+
+    <header>
+
+
+        <div class="container">
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#games">Our Games</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#careers">Careers</a></li>
+                    <li><a href="#investors">Investors</a></li>
+                    <li><a href="#news">News</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="banner bg-section" >
+        <div class="bg-overlay" id="3d-cube"></div>
+        <div class="banner-content fade-in">
+            <h1>Graywater Studios</h1>
+            <p>Pioneering the Future of Interactive Entertainment Since 2015</p>
+            <a href="#contact" class="btn">Explore Our Universe</a>
+        </div>
+    </div>
+
+    <section id="about" class="bg-section" style="background-image: url('./images/office.jpg');">
+        <div class="bg-overlay"></div>
+        <div class="container bg-content">
+            <h2 class="fade-in">About Graywater Studios</h2>
+            <p class="fade-in">At Graywater Studios, we're not just game developers; we're dream weavers, story crafters, and digital architects. Founded in 2015 by a group of passionate gamers turned developers, we've grown from a small indie studio to a powerhouse of creativity in the heart of Robloxia.</p>
+            <p class="fade-in">Our mission is to push the boundaries of what's possible in the digital realm, creating games that not only entertain but inspire, challenge, and bring people together. With a team of over 150 talented individuals from diverse backgrounds, we're committed to fostering an inclusive environment where innovation thrives.</p>
+            <p class="fade-in">Did you know? Our office space features a life-size replica of Bloxenheimer's nuclear reactor, complete with a slide that leads directly to our brainstorming pool!</p>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="container">
+            <div class="stat-grid">
+                <div class="stat-item fade-in">
+                    <h3>150+</h3>
+                    <p>"Passionate" Employees</p>
+                </div>
+                <div class="stat-item fade-in">
+                    <h3>3</h3>
+                    <p>Award-Winning Games</p>
+                </div>
+                <div class="stat-item fade-in">
+                    <h3>50+</h3>
+                    <p>Global Players</p>
+                </div>
+                <div class="stat-item fade-in">
+                    <h3>24/7</h3>
+                    <p>Creativity Flowing</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="games">
+        <div class="container">
+            <h2 class="fade-in">Our Games</h2>
+            <div class="game-grid">
+                <div class="game-card fade-in">
+                    <img src="./images/trackImage.png" alt="Hyper Roblox Karts">
+                    <div class="game-card-content">
+                        <h3>Hyper Roblox Karts</h3>
+                        <p>Our latest adrenaline-pumping racing experience, set to redefine speed in the Roblox universe.</p>
+                    </div>
+                </div>
+                <div class="game-card fade-in">
+                    <img src="./images/bloxenheimer.jpg" alt="Bloxenheimer">
+                    <div class="game-card-content">
+                        <h3>Bloxenheimer</h3>
+                        <p>Fight your way through Bloxenheimer's secret base, boasting over 10 million players.</p>
+                    </div>
+                </div>
+                <div class="game-card fade-in">
+                    <img src="./images/bloxenheimer2.jpg" alt="Bloxenheimer 2">
+                    <div class="game-card-content">
+                        <h3>Bloxenheimer 2</h3>
+                        <p>Master the art of stealth and combat in this visually stunning action-shooter.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="bg-section fade-in" style="background-image: url('./images/oshawottice.png');">
+        <div class="bg-overlay"></div>
+        <div class="container bg-content">
+            <h2 class="fade-in">Our Team</h2>
+            <p class="fade-in">Led by our visionary CEO, oshawottice, our team comprises industry veterans and fresh talent alike. From our award-winning art department to our AI behavior specialists, each member brings a unique perspective to our collaborative process.</p>
+            <p class="fade-in">We believe in the power of diversity, with team members hailing from over 20 countries, speaking 15 languages, and representing a wide range of experiences and backgrounds.</p>
+            <p class="fade-in">Fun fact: Our annual company retreat involves a week-long LARPing session where we act out scenarios from our games. Last year's "Bloxenheimer" resulted in three marriage proposals and one accidental nuclear chart-topper!</p>
+        </div>
+    </section>
+
+    <section id="careers" class="bg-section fade-in" style="background-image: url('./images/goesHard.png');">
+        <div class="bg-overlay"></div>
+        <div class="container bg-content">
+            <h2 class="fade-in">Join Our Team</h2>
+            <p class="fade-in">Are you passionate about creating worlds, telling stories, and pushing the boundaries of interactive entertainment? We're always on the lookout for talented individuals to join our ever-growing family.</p>
+            <p class="fade-in">Current openings include:</p>
+            <ul class="fade-in">
+                <li>Senior Roblox Developer (must have experience in quantum computing)</li>
+                <li>3D Character Artist (preferably with a degree in medieval history)</li>
+                <li>Game Economy Designer (PhD in fictional currency management a plus)</li>
+                <li>Community Manager (fluency in Spanish required)</li>
+                <li>DevOps Engineer (must be able to debug while drunk)</li>
+            </ul>
+            <p class="fade-in">Employee perks include unlimited coffee, a personal hover-desk, and the chance to name a character in our next big release!</p>
+            <a href="#" class="btn fade-in">View All Openings</a>
+        </div>
+    </section>
+
+    <section id="investors" class="bg-section fade-in" style="background-image: url('./images/funding-2.webp');">
+        <div class="bg-overlay"></div>
+        <div class="container bg-content">
+            <h2 class="fade-in">Investor Relations</h2>
+            <p class="fade-in">Graywater Studios is proud to be backed by some of the most forward-thinking investors in the gaming industry. Our last funding round, led by Pixel Ventures and Game Changers Capital, raised $50 million to fuel our expansion into new markets and technologies.</p>
+            <p class="fade-in">Key financial highlights:</p>
+            <ul class="fade-in">
+                <li>Revenue growth: 127% year-over-year</li>
+                <li>Monthly active users: 25 million across all titles</li>
+                <li>R&D investment: 30% of annual revenue</li>
+                <li>Coffee consumption: 10,000 gallons per quarter</li>
+                <li>Bugs squashed: 1,000,000+ (and counting)</li>
+            </ul>
+            <p class="fade-in">Our cutting-edge "Game-onomics" AI predicts we'll be the first trillion-dollar game studio by the year 2075!</p>
+            <a href="#" class="btn fade-in">Download Our Annual Report (Warning: May Contain Traces of Actual Fun)</a>
+        </div>
+    </section>
+
+    <section id="news">
+        <div class="bg-overlay"></div>
+        <div class="container bg-content">
+            <h2 class="fade-in">Latest News</h2>
+            <article class="fade-in">
+                <h3>Graywater Studios Announces Partnership with RoboTech Industries</h3>
+                <p>In a move set to revolutionize in-game AI, we're thrilled to announce our strategic partnership with RoboTech Industries. This collaboration will bring cutting-edge NPC behaviors to our upcoming titles, including the ability for characters to experience existential crises and debate the nature of their virtual reality.</p>
+                <a href="#" class="btn">Read More</a>
+            </article>
+            <article class="fade-in">
+                <h3>Bloxenheimer 1st Anniversary with Massive Update</h3>
+                <p>To mark one fantastic year of swashbuckling fun, we're releasing our biggest update yet, including a new island chain, legendary treasures, and cross-platform play. Players can now engage in epic sea battles with special Bloxenheimer cards while simultaneously filing their virtual taxes!</p>
+                <a href="#" class="btn">Read More</a>
+            </article>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Graywater Studios. All rights reserved.</p>
+            <p>Crafting digital dreams in Robloxia and beyond.</p>
+            <p>This website is powered by the tears of defeated bosses and the laughter of victorious players.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Set up the scene
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('3d-cube').appendChild(renderer.domElement);
+    
+        // Create a cooler shape (e.g., an icosahedron)
+        const geometry = new THREE.IcosahedronGeometry(1, 0);
+        const material = new THREE.MeshBasicMaterial({ color: 0x3498db, wireframe: true });
+        const icosahedron = new THREE.Mesh(geometry, material);
+        scene.add(icosahedron);
+    
+        camera.position.z = 5;
+    
+        // Animation loop with varied camera movement
+        let angle = 0;
+        function animate() {
+            requestAnimationFrame(animate);
+    
+            icosahedron.rotation.x += 0.01;
+            icosahedron.rotation.y += 0.01;
+    
+            // Varied camera movement
+            angle += 0.01;
+            camera.position.x = 5 * Math.sin(angle);
+            camera.position.z = 5 * Math.cos(angle);
+            camera.lookAt(scene.position);
+    
+            renderer.render(scene, camera);
+        }
+        animate();
+    
+        // Resize handler
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    
+        // Fade-in and fade-out effects
+        const fadeElements = document.querySelectorAll('.fade-in');
+    
+        function handleScroll() {
+            fadeElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const elementBottom = el.getBoundingClientRect().bottom;
+    
+                if (elementTop < window.innerHeight * 0.8 && elementBottom > 0) {
+                    el.classList.add('visible');
+                    el.classList.remove('hidden');
+                } else {
+                    el.classList.remove('visible');
+                    el.classList.add('hidden');
+                }
+            });
+        }
+    
+        window.addEventListener('scroll', handleScroll);
+    
+        // Initial call to handle elements in view on page load
+        handleScroll();
+    
+        // Smooth scrolling for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+    
+    <style>
+        .fade-in {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+        }
+        .fade-in.hidden {
+            opacity: 0;
+        }
+    </style>
+    
+    
+</body>
+</html>
