@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>osha quizzler 30000</title>
+        <style>
+            /* Keep all the existing CSS exactly the same */
+            :root {
+                --osha-blue: #8ecdf7;
+                --mew-pink: #ffa6d9;
+                --diamond-purple: #c193ff;
+            }
+            
+            body {
+                font-family: "Comic Sans MS", "Comic Sans", cursive;
+                line-height: 1.6;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #1a1a1a;
+                color: #e0e0e0;
+                perspective: 1000px;
+                min-height: 100vh;
+                transition: background 0.3s ease;
+            }
+
+            /* Background options */
+            body.bg-1 {
+                background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+                            url('https://i.pinimg.com/originals/a6/e1/02/a6e102af8bd8f720ca5e9bd91b06d826.gif');
+                background-size: cover;
+                background-attachment: fixed;
+                background-position: center;
+            }
+
+            body.bg-2 {
+                background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            }
+
+            body.bg-3 {
+                background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+                            url('https://i.pinimg.com/originals/f3/24/37/f32437a28f08f088c5d421c5b0c8c4df.gif');
+                background-size: cover;
+                background-attachment: fixed;
+                background-position: center;
+            }
+
+            /* Background selector */
+            .bg-selector {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: rgba(0, 0, 0, 0.7);
+                padding: 10px;
+                border-radius: 10px;
+                border: 2px solid var(--mew-pink);
+                z-index: 1000;
+            }
+
+            .bg-option {
+                width: 30px;
+                height: 30px;
+                margin: 5px;
+                border: 2px solid white;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+            }
+
+            .bg-option:hover {
+                transform: scale(1.1);
+            }
+
+    
+            body::before {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+            }
+    
+            .quiz-container {
+                position: relative;
+                background-color: rgba(45, 45, 45, 0.85);
+                border-radius: 25px;
+                padding: 25px;
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
+                            0 0 30px var(--osha-blue),
+                            0 0 50px var(--mew-pink);
+                border: 2px solid rgba(255, 255, 255, 0.1);
+                transform-style: preserve-3d;
+                transform: rotateX(5deg);
+                transition: transform 0.3s ease;
+                backdrop-filter: blur(10px);
+                z-index: 1;
+            }
+
+            /* Add new style for file upload area while keeping kawaii theme */
+            .file-upload {
+                text-align: center;
+                padding: 20px;
+                border: 2px dashed var(--mew-pink);
+                border-radius: 15px;
+                margin: 20px 0;
+                background: rgba(255, 255, 255, 0.05);
+                transition: all 0.3s ease;
+            }
+
+            .file-upload.dragover {
+                background: rgba(255, 255, 255, 0.1);
+                border-color: var(--osha-blue);
+                transform: scale(1.02);
+            }
+
+            /* Keep all other existing styles exactly the same */
+            .quiz-container::before,
+            .quiz-container::after {
+                pointer-events: none;
+                z-index: 0;
+            }
+    
+            .quiz-container::before {
+                content: '★';
+                position: absolute;
+                top: -20px;
+                left: -20px;
+                font-size: 2em;
+                color: var(--mew-pink);
+                animation: spin 3s linear infinite;
+            }
+    
+            .quiz-container::after {
+                content: '♡';
+                position: absolute;
+                bottom: -20px;
+                right: -20px;
+                font-size: 2em;
+                color: var(--osha-blue);
+                animation: float 3s ease-in-out infinite;
+            }
+    
+            .question {
+                position: relative;
+                margin-bottom: 20px;
+                padding: 20px;
+                border: 2px solid rgba(255, 255, 255, 0.1);
+                border-radius: 15px;
+                animation: float 6s ease-in-out infinite;
+                transform-style: preserve-3d;
+                background: rgba(255, 255, 255, 0.05);
+                z-index: 2;
+            }
+    
+            .options {
+                position: relative;
+                z-index: 3;
+            }
+    
+            .option {
+                position: relative;
+                display: block;
+                padding: 15px;
+                margin: 15px 0;
+                border: 2px solid rgba(255, 255, 255, 0.1);
+                border-radius: 15px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                background: rgba(255, 255, 255, 0.05);
+                color: #fff;
+                transform-style: preserve-3d;
+                transform: translateZ(20px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                z-index: 3;
+            }
+    
+            .option:hover {
+                background: rgba(255, 255, 255, 0.1);
+                transform: translateX(5px) translateZ(30px) rotateY(-5deg);
+                box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.4),
+                            0 0 20px var(--diamond-purple);
+                border-color: var(--mew-pink);
+            }
+    
+            .option::before {
+                content: '❀';
+                position: absolute;
+                right: 10px;
+                opacity: 0;
+                transition: all 0.3s ease;
+                color: var(--mew-pink);
+                pointer-events: none;
+            }
+    
+            .option:hover::before {
+                opacity: 1;
+                transform: rotate(45deg);
+            }
+
+            .option.correct {
+                color: #4CAF50;
+                border-color: #4CAF50;
+            }
+
+            .option.incorrect {
+                color: #f44336;
+                border-color: #f44336;
+            }
+    
+            .controls {
+                position: relative;
+                z-index: 3;
+            }
+    
+            button {
+                position: relative;
+                padding: 12px 25px;
+                margin: 0 8px;
+                border: 2px solid rgba(255, 255, 255, 0.2);
+                border-radius: 15px;
+                background: rgba(255, 255, 255, 0.1);
+                color: var(--mew-pink);
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-size: 1em;
+                font-weight: normal;
+                transform-style: preserve-3d;
+                transform: translateZ(30px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                z-index: 3;
+                backdrop-filter: blur(5px);
+                font-family: "Comic Sans MS", "Comic Sans", cursive;
+            }
+
+            button:hover {
+                transform: translateY(-2px) translateZ(40px);
+                background: rgba(255, 255, 255, 0.15);
+                color: var(--osha-blue);
+                border-color: var(--diamond-purple);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3),
+                            0 0 15px var(--mew-pink);
+            }
+
+            button:disabled {
+                background: rgba(255, 255, 255, 0.05);
+                color: rgba(255, 255, 255, 0.3);
+                border-color: rgba(255, 255, 255, 0.1);
+                cursor: not-allowed;
+                transform: translateZ(20px);
+                box-shadow: none;
+            }
+    
+            .score {
+                position: relative;
+                text-align: center;
+                font-size: 1.5em;
+                margin: 15px 0;
+                color: var(--mew-pink);
+                text-shadow: 0 0 10px var(--osha-blue);
+                transform: translateZ(40px);
+                animation: float 4s ease-in-out infinite;
+                z-index: 2;
+            }
+    
+            @keyframes float {
+                0%, 100% { transform: translateY(0) translateZ(40px); }
+                50% { transform: translateY(-10px) translateZ(50px); }
+            }
+    
+            @keyframes spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+    
+            @keyframes sparkle {
+                0%, 100% { opacity: 1; transform: scale(1); }
+                50% { opacity: 0.5; transform: scale(1.2); }
+            }
+    
+            ::-webkit-scrollbar {
+                width: 10px;
+            }
+    
+            ::-webkit-scrollbar-track {
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 5px;
+            }
+    
+            ::-webkit-scrollbar-thumb {
+                background: linear-gradient(var(--mew-pink), var(--diamond-purple));
+                border-radius: 5px;
+            }
+    
+            ::-webkit-scrollbar-thumb:hover {
+                background: linear-gradient(var(--diamond-purple), var(--osha-blue));
+            }
+        </style>
+    </head>
+<body>
+    <div class="bg-selector">
+        <button class="bg-option" onclick="changeBackground(1)" style="background: url('https://i.pinimg.com/originals/a6/e1/02/a6e102af8bd8f720ca5e9bd91b06d826.gif') center/cover"></button>
+        <button class="bg-option" onclick="changeBackground(2)" style="background: linear-gradient(45deg, #ff6b6b, #4ecdc4)"></button>
+        <button class="bg-option" onclick="changeBackground(3)" style="background: url('https://i.pinimg.com/originals/f3/24/37/f32437a28f08f088c5d421c5b0c8c4df.gif') center/cover"></button>
+    </div>
+    <div class="quiz-container">
+        <h1 style="text-align: center">piplup penguin and oshawott ice cream</h1>
+        <div id="upload-section">
+            <div class="file-upload" id="drop-zone">
+                example JSON: ask chatgpt to generate document lmao
+                <br>
+                <p>[
+                    {
+                        "question": "What is the capital of France?",
+                        "options": ["London", "Paris", "Berlin", "Madrid"],
+                        "correct": 1
+                    },
+                    {
+                        "question": "What is 2 + 2?",
+                        "options": ["3", "4", "5", "6"],
+                        "correct": 1
+                    }
+                ]</p>
+                <br>
+                <br>
+                <p>Drop your quiz JSON file here or click to upload</p>
+                <input type="file" id="file-input" accept=".json" style="display: none;">
+            </div>
+        </div>
+        <div id="quiz-section" style="display: none;">
+            <div class="score">Score: <span id="score">0</span>/<span id="total-questions">0</span></div>
+            <div id="question-container"></div>
+            <div class="feedback" id="feedback"></div>
+            <div class="controls">
+                <button id="next" onclick="checkAnswer()">Next Question</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Background handling
+        function setCookie(name, value, days) {
+            const d = new Date();
+            d.setTime(d.getTime() + (days*24*60*60*1000));
+            const expires = "expires="+ d.toUTCString();
+            document.cookie = name + "=" + value + ";" + expires + ";path=/";
+        }
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        function changeBackground(bgNum) {
+            document.body.className = '';
+            document.body.classList.add(`bg-${bgNum}`);
+            setCookie('quizBackground', bgNum, 30); // Save for 30 days
+        }
+
+        // Load saved background on startup
+        window.onload = function() {
+            const savedBg = getCookie('quizBackground');
+            if (savedBg) {
+                changeBackground(savedBg);
+            }
+            displayQuestion(); // Your existing onload function
+        }
+
+
+        let questions = [];
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
+
+        // File upload handling
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('file-input');
+        const uploadSection = document.getElementById('upload-section');
+        const quizSection = document.getElementById('quiz-section');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file.type === 'application/json') {
+                handleFile(file);
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) handleFile(file);
+        });
+
+        function handleFile(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    questions = JSON.parse(e.target.result);
+                    if (validateQuestions(questions)) {
+                        startQuiz();
+                    } else {
+                        alert('Invalid quiz format! Please check your JSON file.');
+                    }
+                } catch (error) {
+                    alert('Error reading JSON file! Please make sure it\'s properly formatted.');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function validateQuestions(questions) {
+            return Array.isArray(questions) && questions.every(q => 
+                q.question && 
+                Array.isArray(q.options) && 
+                q.options.length > 0 && 
+                typeof q.correct === 'number' && 
+                q.correct >= 0 && 
+                q.correct < q.options.length
+            );
+        }
+
+        function startQuiz() {
+            uploadSection.style.display = 'none';
+            quizSection.style.display = 'block';
+            document.getElementById('total-questions').textContent = questions.length;
+            currentQuestion = 0;
+            score = 0;
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            const questionData = questions[currentQuestion];
+            const container = document.getElementById('question-container');
+            const feedback = document.getElementById('feedback');
+            feedback.style.display = 'none';
+            
+            let html = `
+                <div class="question">
+                    <h3>Question ${currentQuestion + 1} of ${questions.length}</h3>
+                    <p>${questionData.question}</p>
+                    <div class="options">
+            `;
+            
+            questionData.options.forEach((option, index) => {
+                html += `
+                    <div class="option" onclick="selectOption(${index})">
+                        ${['a', 'b', 'c', 'd'][index]}) ${option}
+                    </div>
+                `;
+            });
+            
+            html += '</div></div>';
+            container.innerHTML = html;
+            answered = false;
+            document.getElementById('next').textContent = 
+                currentQuestion === questions.length - 1 ? 'Finish Quiz' : 'Next Question';
+        }
+
+        function selectOption(optionIndex) {
+            if (answered) return;
+            
+            const options = document.querySelectorAll('.option');
+            const questionData = questions[currentQuestion];
+            const feedback = document.getElementById('feedback');
+            
+            answered = true;
+            
+            options.forEach(opt => opt.classList.remove('correct', 'incorrect'));
+            options[questionData.correct].classList.add('correct');
+            
+            if (optionIndex === questionData.correct) {
+                options[optionIndex].classList.add('correct');
+                score++;
+                feedback.innerHTML = 'Correct! Well done!';
+                feedback.className = 'feedback correct';
+            } else {
+                options[optionIndex].classList.add('incorrect');
+                feedback.innerHTML = `Incorrect. The correct answer was: ${questions[currentQuestion].options[questionData.correct]}`;
+                feedback.className = 'feedback incorrect';
+            }
+            
+            feedback.style.display = 'block';
+            document.getElementById('score').textContent = score;
+        }
+
+        function checkAnswer() {
+            if (!answered) {
+                alert('Please select an answer before continuing!');
+                return;
+            }
+            
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function finishQuiz() {
+            const container = document.getElementById('question-container');
+            const controls = document.querySelector('.controls');
+            
+            container.innerHTML = `
+                <h2>Quiz Complete!</h2>
+                <p>Final Score: ${score}/${questions.length}</p>
+                <p>Percentage: ${((score/questions.length) * 100).toFixed(2)}%</p>
+                <button onclick="location.reload()">Try Another Quiz</button>
+            `;
+            
+            controls.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
